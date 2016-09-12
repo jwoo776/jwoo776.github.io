@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"><title>Lab3</title>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script></head>
+<body style="width: 100%; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); background-image: url(lgrey011.jpg);" alink="black" link="black" vlink="black">
+<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+</style>
+<table style="width: 80%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="20">
+<tbody>
+<tr>
+<td style="width: 100%;">
+<table style="text-align: left; width: 979px; height: 155px;" border="0" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 80%; text-align: center;">
+<h2><big>Geography 771</big></h2>
+<big><span style="font-family: Times New Roman;">University
+of Auckland</span><br style="font-family: Times New Roman;">
+<span style="font-family: Times New Roman;">Jayden
+Woodhead</span></big></td>
+<td style="width: 20%;"><img style="width: 288px; height: 144px;" alt="" src="new-zealand-1184112__340.jpg"><br></td>
+</tr>
+</tbody>
+</table>
+<table style="text-align: left; background-color: rgb(153, 153, 153); width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 20%;"><a href="index.html">Home</a></td>
+<td style="width: 20%;"><a href="Lab2.html">Lab
+2</a></td>
+<td style="width: 20%;"><a href="Lab3.html">Lab
+3</a></td>
+<td style="width: 20%;"><a href="Lab4.html">Lab
+4</a></td>
+<td style="width: 20%;"><a href="Lab5.html">Lab
+5</a></td>
+</tr>
+</tbody>
+</table>
+<table style="width: 80%; text-align: centre; margin-Centre: centre; margin-right: centre;" border="0" cellpadding="2" cellspacing="2">
+                <tbody>
+                <tr>
+                    <td>
+                        <h1>The Great Walks of New Zealand</h1>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+<div id='Lab3map' style='width: 100%; height: 800px;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoiandvbzc3NiIsImEiOiJjaXNxcWQ2dDgwMjRuMm5tMWt5Mm9wOWM3In0.X3NQk-v77HjLRphTPQZs9w';
+var map = new mapboxgl.Map({
+container: 'Lab3map',
+style: 'mapbox://styles/jwoo776/cisz7jv8500022xlsqwi50kku',
+center: [174.041,-41.211],
+zoom: 5.0
+});
+</script>
+<table style="width: 80%; text-align: centre; margin-Centre: centre; margin-right: centre;" border="0" cellpadding="2" cellspacing="2">
+                <tbody>
+                <tr>
+                    <td>
+                        <h1>The Great Walks of New Zealand</h1>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+<div id='Lab3map2' style='width: 100%; height: 800px;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoiandvbzc3NiIsImEiOiJjaXNxcWQ2dDgwMjRuMm5tMWt5Mm9wOWM3In0.X3NQk-v77HjLRphTPQZs9w';
+var Lab3map2 = new mapboxgl.Map({
+container: 'Lab3map2',
+style: 'mapbox://styles/jwoo776/cisz9xxb9000z2ypo9uqo6gom',
+center: [174.041,-41.211],
+zoom: 5.0
+});
+
+Lab3map2.on('load', function () {
+    Lab3map2.addSource('greatwalks-6diz0k', {
+        type: 'vector',
+        url: 'mapbox://jwoo776.bv7oatbc'
+    });
+    Lab3map2.addLayer({
+        "id": 'greatwalks-6diz0k',
+        "type": 'line',
+        "source": 'greatwalks-6diz0k',
+        "source-layer": 'greatwalks-6diz0k',
+        "layout": {
+		
+            "line-join": "round",
+            "line-cap": "round"
+        },
+        "paint": {
+            "line-color": "#ff0000",
+            "line-width": 1.5
+        }
+    });
+
+	    Lab3map2.addSource("points", {
+        "type": "geojson",
+        "data": {
+            "type": "FeatureCollection",
+            "features": [{
+"type": "Feature",
+      "properties": {
+	  "description": "<strong>Rakiura Track</strong><p>Escape on an island adventure - relax and unwind in the peaceful surroundings with the bush, birds and beach at your side.</p>",
+        "icon":"triangle-15",
+        "Title": "Rakiura Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          168.05820465087888,
+          -46.86253853984663
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	   "description": "<strong>Kepler Track</strong><p>Vast tussock-covered ridgelines and spectacular alpine vistas contrast with peaceful lakeside and valley beech forest in this wilderness adventure.</p>",
+        "icon": "triangle-15",
+        "Title": "Kepler Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          167.6348876953125,
+          -45.394592696926615
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	   "description": "<strong>Milford Track</strong><p>Experience 'the finest walk in the world' as you retrace the steps of early explorers on the world-renowed Milford Track. Take a journey along valleys carved by glaciers, wander through ancient rainforests and admire cascading waterfalls.</p>",
+        "icon": "triangle-15",
+        "Title": "Milford Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          167.7777099609375,
+          -44.80717308106487
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	   "description": "<strong>Routeburn Track</strong><p>This is the ultimate alpine adventure, weaving through meadows, reflective tarns and alpine gardens. You'll be rewarded with spectacular vistas over vast mountain ranges and valleys.</p>",
+        "icon": "triangle-15",
+        "Title": "Routeburn Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          168.167724609375,
+          -44.74673324024679
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	   "description": "<strong>Heaphy Track</strong><p>Travel through expansive tussock downs, lush forests and nīkau palms to the roaring seas of the West Coast.</p>",
+        "icon": "triangle-15",
+        "Title": "Heaphy Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          172.15026855468747,
+          -40.93841495689794
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	   "description": "<strong>Abel Tasman Coast Track</strong><p>Blessed with a mild climate, golden beaches and lush coastal native bush, the Abel Tasman Coast Track has it all.</p>",
+        "icon": "triangle-15",
+        "Title": "Abel Tasman Coast Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          173.04016113281247,
+          -40.863679665481676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	   "description": "<strong>Whanganui Journey</strong><p>Explore the scenic beauty paddling up the Whanganui River, a landscape of remote hills and bush clad valleys.</p>",
+        "icon": "triangle-15",
+        "Title": "Whanganui River"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          175.111083984375,
+          -39.588757276965445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	   "description": "<strong>Round the Mountain Track</strong><p>Explore the volcanic heart of Tongariro National Park, a landscape of stark glacial contrasts and alpine views.</p>",
+        "icon": "triangle-15",
+        "Title": "Round the Mountain Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          175.572509765625,
+          -39.33429742980723
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+	   "description": "<strong>Lake Waikaremoana</strong><p>Trace the shoreline of Lake Waikaremoana, the 'sea of rippling waters.' Pass giant podocarp trees and remote beaches, and enjoy breathtaking views from Panekire Bluff.</p>",
+        "icon": "triangle-15",
+        "Title": "Lake Whakaremoana Great Walk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          177.00073242187497,
+          -38.805470223177444
+        ]
+      }
+    },
+	]
+        }
+    });
+
+    Lab3map2.addLayer({
+        "id": "points",
+        "type": "symbol",
+        "source": "points",
+        "layout": {
+            "icon-image": "{icon}",
+            "text-field": "{Title}",
+            "text-font": ["Arial Unicode MS Regular", "Arial Unicode MS Regular"],
+            "text-offset": [0, 0.1],
+            "text-anchor": "top"
+        }
+    });	
+	Lab3map2.setLayerZoomRange('points', 1, 22);
+		
+	Lab3map2.on('click', function (e) {
+    var features = Lab3map2.queryRenderedFeatures(e.point, { layers: ['points'] });
+
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+   
+    var popup = new mapboxgl.Popup()
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.description)
+        .addTo(Lab3map2);
+});
+	Lab3map2.on('mousemove', function (e) {
+var features = Lab3map2.queryRenderedFeatures(e.point, { layers: ['points'] });
+Lab3map2.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
+Lab3map2.on('click', function (e) {
+var features = Lab3map2.queryRenderedFeatures(e.point, { layers: ['points'] });
+if (features.length) {
+Lab3map2.flyTo({center: features[0].geometry.coordinates, zoom: 10});
+}
+});
+	});
+   	
+</script>
+
+<br>
+<br>Lab 3<br>
+<br>
+<div style="text-align: center;"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+</body></html>
