@@ -280,7 +280,7 @@ Lab3map2.getCanvas().style.cursor = features.length ? 'pointer' : '';
 Lab3map2.on('click', function (e) {
 var features = Lab3map2.queryRenderedFeatures(e.point, { layers: ['points'] });
 if (features.length) {
-Lab3map2.flyTo({center: features[0].geometry.coordinates, zoom: 10});
+Lab3map2.flyTo({center: features[0].geometry.coordinates, zoom: 9});
 }
 });
 	});
