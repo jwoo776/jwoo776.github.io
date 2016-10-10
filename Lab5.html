@@ -1,6 +1,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
-<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Lab5</title></head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="http://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+	<script src="http://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+    ><title>Lab5</title></head>
+    
+    <style>
+	.info {
+    padding: 8px;
+    font: 14px font, sans-serif;
+    background: black;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 0px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+  
+        
+.legend {
+text-align: left;
+line-height: 20px;
+color: #555;
+font-weight: bold;
+
+
+
+}
+.legend i {
+width: 18px;
+height: 18px;
+float: left;
+margin-right: 8px;
+opacity: 0.9;
+line-height: 10px;
+font-weight: normal;
+}
+
+</style>
+    
 <body style="width: 100%; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); background-image: url(lgrey011.jpg);" alink="black" link="black" vlink="black">
 <table style="width: 80%; height: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="20">
 <tbody>
@@ -34,6 +76,136 @@ Woodhead</span></big></td>
 </tr>
 </tbody>
 </table>
+    <table style="width: 80%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+                <tbody>
+                <tr>
+                    <td>
+                        <h1>Hexbin Map of tweets about Haka versus All Blacks</h1>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    <body>
+<div id="mymap" style="height: 600px; width: 100%;"></div>
+            <div style="text-align: center;"></div>
+<script type="text/javascript" src="Lab5.js"></script>
+	<script>
+
+		var mymap = L.map('mymap').setView([-40.9006, 174.8860], 5.5);
+CartoDB_Positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+			maxZoom: 8,
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> / <a href="https://twitter.com/mattzook">mattzook</a>' +  ' / <a href="http://www.floatingsheep.org/p/dolly.html">DOLLY </a>'+  ' / <a href="http://www.floatingsheep.org/">Floating Sheep </a>',
+			id: 'mapbox.streets'
+		}).addTo(mymap);
+        
+        </script>
+
+		<script> 
+            
+L.geoJson(Lab5).addTo(mymap)
+function getColor(d) {
+    return d > 1.01 ? '#cb181d' :
+           d > 0.99 ? '#fb6a4a' :
+           d > 0.01 ? '#fcbba1' :
+           d > 0.00 ? '#fff5f0' :
+                              '#fff5f0';
+}
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.LQ),
+        weight: 1,
+        opacity: 1,
+        color: '#ffffff',
+        fillOpacity: 0.8
+    };
+}
+L.geoJson(Lab5, {style: style}).addTo(mymap);
+
+var geoJson
+
+function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 1,
+        color: '#666',
+        
+        fillOpacity: 0
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        
+        layer.bringToFront();
+    }
+    info.update (layer.feature.properties);
+}
+        
+geojson = L.geoJson(Lab5, {style: style}).addTo(mymap); 
+        
+function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+}
+geojson = L.geoJson(Lab5, {style: style}).addTo(mymap)
+
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+		})
+		}
+        
+	geojson = L.geoJson(Lab5, {
+    style: style,
+    onEachFeature: onEachFeature
+}).addTo(mymap);	
+        
+
+var info = L.control();
+
+info.onAdd = function (mymap) {
+    this._div = L.DomUtil.create('div', 'info'); 
+    this.update();
+    return this._div;
+};
+
+info.update = function (props) {
+    if ( props ) {
+       this._div.innerHTML = '<h4>Ratio of Tweets</h4>' + (props ?  props.LQ +' Tweet' : 'Since January 2013');
+    } else {
+	   this._div.innerHTML = '';
+    }
+};
+
+info.addTo(mymap);
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (mymap) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0.00, 0.01, 0.99, 1.01],
+		key_labels = ["No Tweets About Haka Or All Blacks", "More Tweets About All Blacks", "All Black Tweets = Haka Tweets", "More Tweets About Haka"],
+       labels = ["Tweet Ratio"],
+	from,to;
+
+for (var i = 0; i < grades.length; i++) {
+from = grades[i];
+to = grades[i + 1];
+labels.push(
+'<i style="background:' + getColor(from + 0.01) + '"></i> ' +
+key_labels[i]);
+}
+div.innerHTML = labels.join('<br>');
+return div;
+};
+        
+        
+legend.addTo(mymap); 
+
+
+        
+		</script>
+      
 <br>
 <br>Lab 5<br>
 <br>
