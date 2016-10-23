@@ -143,7 +143,7 @@ function highlightFeature(e) {
 }
         
 geojson = L.geoJson(hex, {style: style}).addTo(mymap); 
-        
+u        
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
 }
@@ -153,8 +153,7 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-		})
-		}
+		})		}
         
 	geojson = L.geoJson(hex, {
     style: style,
@@ -209,7 +208,7 @@ legend.addTo(mymap);
 		</script>
 </body>
 <br>
-<br>Hexbins are a great way to visualise large data sets that are located in concentrated area. They provide a great amount of user interactivity while reducing clatter. The dataset that the map above displays is vehicle crash data obtained from HackAKL and includes 65,535 unique events over the greater Auckland region. The dataset also provided data not used by this map such as vehicle type, time/date of event, road names, known causes, objects struck, road curvature, wet/dry roads, and several others. The map produced focuses on the number of events and their severity. This scope was chosen as it allows for the visualisation of Auckland’s most dangerous roads in six unique categories. This map was generated using QGIS with the added MMQGIS plugin added with a background map provided by CartoDB.  <br>
+<br>Hexbins are a great way to visualise large data sets that are located in concentrated area. They provide a great amount of user interactivity while reducing clutter. The dataset that the map above displays is vehicle crash data obtained from HackAKL and includes 65,535 unique events over the greater Auckland region. The dataset also provided data not used by this map such as vehicle type, time/date of event, road names, known causes, objects struck, road curvature, wet/dry roads, and several others. The map produced focuses on the number of events and their severity. This scope was chosen as it allows for the visualisation of Auckland’s most dangerous roads in six unique categories. This map was generated using QGIS with the added MMQGIS plugin added with a background map provided by CartoDB.  <br>
 <br>
 <div style="text-align: center;"></div>
 </td>
